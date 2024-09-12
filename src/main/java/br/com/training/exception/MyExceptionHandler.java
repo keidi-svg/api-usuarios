@@ -11,7 +11,6 @@ import java.io.Serializable;
 @ControllerAdvice
 public class MyExceptionHandler {
 
-    // Definir UserNotFoundException como uma classe interna
 	public class UserNotFoundException extends Exception implements Serializable {
 	    private static final long serialVersionUID = 1L;
 
@@ -20,8 +19,6 @@ public class MyExceptionHandler {
 	    }
 	}
 
-
-    // Definir InvalidRequestException como uma classe interna
     public static class InvalidRequestException extends Exception implements Serializable {
     	private static final long serialVersionUID = 1L;
         public InvalidRequestException(String message) {
@@ -31,21 +28,18 @@ public class MyExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
-        // Aqui você pode implementar a lógica para lidar com todas as exceções não tratadas
         String errorMessage = "Ocorreu um erro interno. Tente novamente mais tarde.";
         return new ResponseEntity<>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex, WebRequest request) {
-        // Aqui você pode implementar a lógica para lidar com a exceção UserNotFoundException
         String errorMessage = "Usuário não encontrado.";
         return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(InvalidRequestException.class)
     public ResponseEntity<Object> handleInvalidRequestException(InvalidRequestException ex, WebRequest request) {
-        // Aqui você pode implementar a lógica para lidar com a exceção InvalidRequestException
         String errorMessage = "Requisição inválida.";
         return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
     }

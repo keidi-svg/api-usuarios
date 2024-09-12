@@ -106,10 +106,6 @@ public class UserControllerTest {
         mockMvc.perform(MockMvcRequestBuilders
             .delete("/users/12345678900"))
             .andExpect(MockMvcResultMatchers.status().isNoContent());
-
-        //mockMvc.perform(MockMvcRequestBuilders
-         //   .get("/users/12345678900"))
-         //   .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
 };
